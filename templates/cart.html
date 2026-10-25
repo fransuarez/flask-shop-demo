@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Cart · Demo Shop{% endblock %}
+
+{% block content %}
+<h1>Your cart</h1>
+
+{% if cart_items %}
+  {% for item in cart_items %}
+    <article class="cart-row" data-product-id="{{ item.product.id }}">
+      <img src="{{ item.product.image }}" alt="" loading="lazy">
+      <div>
+        <h2>{{ item.product.title }}</h2>
+        <p>Quantity: {{ item.quantity }} · Subtotal: ${{ "%.2f"|format(item.subtotal) }}</p>
+        <form method="post" action="{{ url_for('remove_from_cart', product_id=item.product.id) }}">
+          <button class="secondary" type="submit">Remove</button>
+        </form>
+      </div>
+    </article>
+  {% endfor %}
+
+  <p class="total">Total: ${{ "%.2f"|format(total) }}</p>
+  <a class="button-link" href="{{ url_for('checkout') }}">Continue to checkout</a>
+{% else %}
+  <p>Your cart is empty.</p>
+  <a href="{{ url_for('products') }}">Browse products</a>
+{% endif %}
+{% endblock %}

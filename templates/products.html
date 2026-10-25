@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Products · Demo Shop{% endblock %}
+
+{% block content %}
+<h1>Products</h1>
+
+<div class="product-grid">
+  {% for product in products %}
+    <article class="card" data-product-id="{{ product.id }}">
+      <img src="{{ product.image }}" alt="" loading="lazy">
+      <h2>{{ product.title }}</h2>
+      <p class="price">${{ "%.2f"|format(product.price) }}</p>
+      <form method="post" action="{{ url_for('add_to_cart', product_id=product.id) }}">
+        <button type="submit">Add to cart</button>
+      </form>
+    </article>
+  {% else %}
+    <p>No products are available right now.</p>
+  {% endfor %}
+</div>
+{% endblock %}

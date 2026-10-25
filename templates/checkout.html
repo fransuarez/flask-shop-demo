@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Checkout · Demo Shop{% endblock %}
+
+{% block content %}
+{% if completed %}
+  <h1>Thanks, {{ order_name }}!</h1>
+  <p>Your demo order is complete. No payment was taken.</p>
+  <a href="{{ url_for('products') }}">Back to products</a>
+{% else %}
+  <h1>Demo checkout</h1>
+  <p>This is a test checkout; it does not submit an order to Fake Store API.</p>
+  <form method="post">
+    <label for="name">Name</label>
+    <input id="name" name="name" required>
+    <button type="submit">Place demo order</button>
+  </form>
+{% endif %}
+{% endblock %}
