@@ -6,16 +6,16 @@
 
 <div class="product-grid">
   {% for product in products %}
-    <article class="card" data-product-id="{{ product.id }}">
+    <article class="card" data-testid="product-card" data-product-id="{{ product.id }}">
       <img src="{{ product.image }}" alt="" loading="lazy">
       <h2>{{ product.title }}</h2>
       <p class="price">${{ "%.2f"|format(product.price) }}</p>
       <form method="post" action="{{ url_for('add_to_cart', product_id=product.id) }}">
-        <button type="submit">Add to cart</button>
+        <button type="submit" data-testid="add-to-cart-{{ product.id }}">Add to cart</button>
       </form>
     </article>
   {% else %}
-    <p>No products are available right now.</p>
+    <p data-testid="products-empty">No products are available right now.</p>
   {% endfor %}
 </div>
 {% endblock %}

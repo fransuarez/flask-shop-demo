@@ -11,13 +11,13 @@
     <a href="{{ url_for('products') }}">Demo Shop</a>
     <nav>
       <a href="{{ url_for('products') }}">Products</a>
-      <a href="{{ url_for('cart') }}">Cart</a>
+      <a href="{{ url_for('cart') }}" data-testid="cart-link">Cart</a>
     </nav>
   </header>
 
   <main class="container">
     {% for category, message in get_flashed_messages(with_categories=true) %}
-      <p class="notice {{ category }}">{{ message }}</p>
+      <p class="notice {{ category }}" data-testid="flash" data-category="{{ category }}">{{ message }}</p>
     {% endfor %}
     {% block content %}{% endblock %}
   </main>
