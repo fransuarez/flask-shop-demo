@@ -24,5 +24,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Check repository files
+        run: |
+          pwd
+          ls -la
+          python -c "import app; print(app.__file__)"
+
       - name: Run tests
-        run: pytest
+        run: pytest -m pytest
